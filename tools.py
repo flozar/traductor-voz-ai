@@ -29,11 +29,19 @@ def traducir_texto(texto_original):
     return resultado
 
 def generar_audio_openai(texto, archivo_audio, voz="nova"):
+    # 📍 Guarda el archivo en `static/audio/`
+    ruta_archivo = f"static/audio/{archivo_audio}"
+
     response = openai_client.audio.speech.create(
         model="tts-1-hd",
         voice=voz,
         input=texto
     )
 
-    response.stream_to_file(archivo_audio)
-    return archivo_audio
+    response.stream_to_file(ruta_archivo)
+
+    # 📢 Imprime la ubicación del archivo en los logs para depuración
+    print(f"🔊 Archivo de audio guardado en: {ruta_archivo}")
+
+    # Devuelve la URL para acceder al archivo desde la web
+    return f"/static/audio/{archivo_audio}"
