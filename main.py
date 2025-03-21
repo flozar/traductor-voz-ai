@@ -33,7 +33,7 @@ async def translate(request: Request, texto: str = Form(...)):
     texto_actual = traducir_texto(texto)
 
     voz_por_defecto = "nova"
-    audio_path = f"static/audio/audio_{voz_por_defecto}.mp3"
+    audio_path = f"audio_{voz_por_defecto}.mp3"
     generar_audio_openai(texto_actual, audio_path, voz_por_defecto)
 
     return templates.TemplateResponse("index.html", {
