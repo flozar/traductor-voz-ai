@@ -4,3 +4,4 @@ openai
 jinja2
 python-multipart
 gunicorn
+python-dotenv
